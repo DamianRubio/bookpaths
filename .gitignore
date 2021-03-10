@@ -1,0 +1,6 @@
+# Avoiding to upload some files to the repo
+.vscode
+venv
+db.sqlite3
+*.pyc
+data
