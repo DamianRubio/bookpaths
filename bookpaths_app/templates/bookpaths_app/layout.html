@@ -29,14 +29,14 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                        <a class="nav-link" href="{% url 'login' %}">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -47,10 +47,10 @@
         </nav>
     </header>
 
-    <main role="main" class="container">
+    <div role="main" class="container d-flex h-100">
         {% block body %}
         {% endblock %}
-    </main>
+    </div>
 
     <footer class="footer">
         <div class="container text-center">
