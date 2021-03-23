@@ -47,9 +47,9 @@ class BookPathFollow(models.Model):
     )
 
     bookpath = models.ForeignKey(
-        BookPath, on_delete=models.CASCADE, related_name='is_liked')
+        BookPath, on_delete=models.CASCADE, related_name='is_followed')
     follower = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='likes')
+        User, on_delete=models.CASCADE, related_name='follows')
     status = models.IntegerField(choices=Status, default=NOT_STARTED)
     current_step = models.PositiveIntegerField(default=0)
 

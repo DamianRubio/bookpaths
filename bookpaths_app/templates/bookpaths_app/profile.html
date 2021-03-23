@@ -1,8 +1,40 @@
 {% extends "bookpaths_app/layout.html" %}
+{% load static %}
+
+{% block script %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
 
 {% block body %}
 
-<div class="row text-center justify-content-center align-self-center w-100">
+<div class="row text-center justify-content-center w-100">
+    {% if message %}
+    <div class="w-75 alert alert-warning">{{ message }}</div>
+    {% endif %}
+    <div class="w-75">
+        <h2>Hi, {{user.username}}!</h2>
+        <div class="h5 text-muted">
+            Welcome back to Book Paths
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#active-content">Active Bookpaths <span class="badge badge-pill badge-secondary">{{active_bookpaths|length}}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#finished-content">Finished Bookpaths <span class="badge badge-pill badge-secondary">{{finished_bookpaths|length}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#contributions-content">Your Contributions <span class="badge badge-pill badge-secondary">{{contributions|length}}</span></a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade active show" id="active-content">Lorem Ipsum 1</div>
+            <div class="tab-pane fade" id="finished-content">Lorem Ipsum 2</div>
+            <div class="tab-pane fade" id="contributions-content">Lorem Ipsum 3</div>
+          </div>
+    </div>
 </div>
 
 

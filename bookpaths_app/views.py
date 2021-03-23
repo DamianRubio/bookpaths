@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User
+from .models import User, BookPath
 
 
 def categories(request):
@@ -27,7 +27,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("profile"))
         else:
             return render(request, "bookpaths_app/login.html", {
                 "message": "Invalid username and/or password."
@@ -70,4 +70,12 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, "bookpaths_app/profile.html")
+    active_bookpaths = request.user.follows.filter(status=0) | request.user.follows.filter(status=1)
+    finished_bookpaths = request.user.follows.filter(status=2)
+    contributions = BookPath.objects.filter(author=request.user)
+
+    return render(request, "bookpaths_app/profile.html", {
+        'active_bookpaths': active_bookpaths,
+        'finished_bookpaths': finished_bookpaths,
+        'contributions': contributions,
+    })
