@@ -37,4 +37,6 @@ Lorem ipsum
 
 The project makes use of the [Open Library API](https://openlibrary.org/developers/api) that has some restrictions on number of requests. Consider that if some action is abused in a short span of time an error can be returned by the API.
 
+The project makes use of the Python library [Pillow](https://pillow.readthedocs.io/en/stable/) to deal with the book covers. This library has been included in the `requirements.txt` file.
+
 During the development of the project I have used the [Django import / export](https://django-import-export.readthedocs.io/en/stable/) library to load data from files. It  has been included in the `requirements.txt` file.
