@@ -1,0 +1,55 @@
+{% extends "bookpaths_app/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="row text-center justify-content-center w-100">
+  {% if message %}
+  <div class="w-75 alert alert-warning">{{ message }}</div>
+  {% endif %}
+  <div class="w-75">
+    <h2>Sharing is caring</h2>
+    <div class="h5 text-muted mb-3">
+      Learning some new topics lately? Share your knowledge path
+    </div>
+    <hr>
+    <form method="post" id="contributer">
+      {% csrf_token %}
+      <div class="form-group" id="form_contribute">
+        {{contribution_form}}
+      </div>
+
+      {{ contribution_step_formset.management_form }}
+
+      {% if contribution_step_formset.errors %}
+      {% for error in contribution_step_formset.errors %}
+      {% if error %}
+      <div class="alert alert-danger" role="alert">
+        {% for key, value in error.items %}
+        {{ value|striptags }}
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {% for contribution_step_form in contribution_step_formset %}
+      <div class="contribution-formset input-group form-inline d-flex justify-content-center align-self-center">
+        {% for field in contribution_step_form %}
+        <span class="justify-content-center align-self-center">{{field.label}}:</span> {{field}}
+        {% endfor%}
+      </div>
+      {% endfor %}
+      <input type="submit" class="btn btn-primary font-weight-bold mt-3 d-block mx-auto" name="contribute"
+        value="Add BookPath" style="width:200px;" />
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'bookpaths_app/jquery.formset.js' %}"></script>
+<script src="{% static 'bookpaths_app/contribution.js' %}"></script>
+{% endblock %}

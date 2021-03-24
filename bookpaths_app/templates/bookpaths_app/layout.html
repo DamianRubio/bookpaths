@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="{% static 'bookpaths_app/styles.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     {% block script %}
     {% endblock %}
 </head>
@@ -17,7 +20,7 @@
 
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="{% url 'index' %}">Book Paths</a>
+            <a class="navbar-brand" href="{% url 'index' %}">BookPaths</a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,6 +30,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'categories' %}">Explore</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contribute' %}">Contribute</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 {% if user.is_authenticated %}
                 <a class="nav-link" href="{% url 'profile' %}"><strong>Profile</strong></a>

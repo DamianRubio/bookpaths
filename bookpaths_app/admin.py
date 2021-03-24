@@ -3,8 +3,10 @@ from django.contrib.auth.hashers import make_password
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Category, User
+from .models import Category, User, BookPath
 
+
+admin.site.register(BookPath)
 
 class CategoryResource(resources.ModelResource):
     class Meta:
