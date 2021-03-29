@@ -7,10 +7,6 @@ from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
 
-def get_image_path(instance, filename):
-    return os.path.join('covers', str(instance.id), filename)
-
-
 class User(AbstractUser):
     pass
 
@@ -75,7 +71,7 @@ class Book(models.Model):
         regex='\w.{13}$', message='ISBN-13 length has to be 13')], max_length=13, blank=False, null=False)
     title = models.CharField(max_length=240, blank=False, null=False)
     author = models.CharField(max_length=240, blank=False, null=False)
-    cover = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    cover = models.URLField(max_length=1000, blank=True, null=True)
     publishers = models.CharField(max_length=240, blank=False, null=False)
     number_of_pages = models.IntegerField(blank=True)
 

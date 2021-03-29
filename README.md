@@ -41,7 +41,7 @@ Lorem ipsum
 
 The project makes use of the [Open Library API](https://openlibrary.org/developers/api) that has some restrictions on number of requests. Consider that if some action is abused in a short span of time an error can be returned by the API.
 
-The project makes use of the Python library [Pillow](https://pillow.readthedocs.io/en/stable/) to deal with the book covers. This library has been included in the `requirements.txt` file.
+The project makes use of the Python library [Requests](https://requests.readthedocs.io/en/master/) in order to consume the above mentioned API. This library has been included in the `requirements.txt` file.
 
 The project makes use of the jQuery plugin [Django Dynamic Formsets](https://github.com/elo80ka/django-dynamic-formset) to deal with the insertion of bookpaths. The source code of the plugin is included in the `static/bookpaths_app` folder of the app.
 

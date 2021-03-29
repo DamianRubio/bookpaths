@@ -3,13 +3,15 @@
 
 {% block body %}
 
-<div class="row text-center justify-content-center w-100">
-  {% if message %}
-  <div class="w-75 alert alert-warning">{{ message }}</div>
+<div class="w-100">
+  {% if messages %}
+  {% for message in messages %}
+  <span class="row justify-content-center alert alert-danger">{{ message }}</span>
+  {% endfor %}
   {% endif %}
-  <div class="w-75">
+  <div class="row text-center justify-content-center">
     <h2>Sharing is caring</h2>
-    <div class="h5 text-muted mb-3">
+    <div class="w-100 justify-content-center h5 text-muted mb-3">
       Learning some new topics lately? Share your knowledge path
     </div>
     <hr>
