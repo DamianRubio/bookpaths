@@ -19,3 +19,8 @@ body {
 body>.container {
     padding: 80px 15px 0;
 }
+
+.cover_image {
+    width: 10%;
+    height: auto;
+}

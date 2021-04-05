@@ -1,0 +1,55 @@
+{% extends "bookpaths_app/layout.html" %}
+
+{% block title %}
+Book Path - {{ bookpath.name }}
+{% endblock %}
+
+{% block body %}
+
+<div class="w-100">
+  {% if messages %}
+  {% for message in messages %}
+  <span class="row justify-content-center alert alert-danger">{{ message }}</span>
+  {% endfor %}
+  {% endif %}
+  <div class="row text-center justify-content-center">
+    <h2> {{ bookpath.name }}</h2>
+    <div class="w-100 justify-content-center h5 text-muted mb-3">
+        Category: {{ bookpath.category }}
+    </div>
+    <div class="w-100 justify-content-center h5 text-muted mb-3">
+        {{ bookpath.description }}
+    </div>
+    <div class="w-100 justify-content-center h5 text-muted mb-3">
+        <span>Steps: {{ bookpath_steps|length }}</span> | <span>Pages: {{ total_pages }} </span> | <span>Author: {{bookpath.author}}</span>
+    </div>
+    <div class="w-100 justify-content-center h4 mb-3">
+        <span>Followers: TODO</span> | <span>Finished %: TODO</span>
+    </div>
+    <form method="post" class="text-right">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" name="path_follow" value="Follow BookPath"
+          style="width:200px;" />
+      </form>
+  </div>
+  <div class="row justify-content-center w-100 mt-3">
+    {% for step in bookpath_steps %}
+        <div class="media container position-relative bg-light shadow p-4 rounded mb-3">
+            {% if step.book.cover %}
+                <img src="{{ step.book.cover }}" class="cover_image mr-3">
+            {% endif %}
+                <div class="media-body">
+                    <h5>Step #{{ step.step_number}}</h5>
+                    <h3>{{ step.book.title }}</h3>
+                    <p class="h4 text-muted">{{ step.book.author }}</p>
+                    <span class="text-muted d-block">Publisher: {{ step.book.publishers }}</span>
+                    <span class="text-muted">Number of pages: {{ step.book.number_of_pages }}</span>
+                    <a href="{% url 'book' book_isbn=step.book.isbn_10 %}" class="stretched-link"></a>
+                </div>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}

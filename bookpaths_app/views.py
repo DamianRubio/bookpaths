@@ -10,7 +10,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import Book, BookPath, Category, User
+from .models import Book, BookPath, BookPathStep, Category, User
+
+from django.shortcuts import get_object_or_404
 
 
 class ContributionStepForm(forms.Form):
@@ -113,12 +115,19 @@ def find_book(isbn_10):
             response = requests.get(
                 f'https://openlibrary.org/api/books?bibkeys=ISBN:{isbn_10}&jscmd=details&format=json')
             book_data = response.json().get(f'ISBN:{isbn_10}')
+            cover = book_data.get('thumbnail_url').replace('-S.jpg', '-M.jpg')
             new_book = Book(isbn_10=book_data.get('details').get('isbn_10')[0], isbn_13=book_data.get('details').get('isbn_13')[0], title=book_data.get('details').get('title'), publishers=book_data.get(
-                'details').get('publishers')[0], number_of_pages=book_data.get('details').get('number_of_pages'), author=book_data.get('details').get('authors')[0].get('name'), cover=book_data.get('thumbnail_url'))
+                'details').get('publishers')[0], number_of_pages=book_data.get('details').get('number_of_pages'), author=book_data.get('details').get('authors')[0].get('name'), cover=cover)
             new_book.save()
             return new_book
         except:
             raise Exception(f'The ISBN {isbn_10} can not be found')
+
+
+def store_steps(bookpath, books_in_bookpath):
+    for book in books_in_bookpath:
+        bookpath_step = BookPathStep(book=book, bookpath=bookpath)
+        bookpath_step.save()
 
 
 @login_required
@@ -144,9 +153,11 @@ def contribute(request):
                     })
             bookpath_cd = contribution_form.cleaned_data
             category = Category.objects.get(name=bookpath_cd.get('category'))
-            bookpath = BookPath(name=bookpath_cd.get('name'), description=bookpath_cd.get('description'), category=category, author=request.user)
+            bookpath = BookPath(name=bookpath_cd.get('name'), description=bookpath_cd.get(
+                'description'), category=category, author=request.user)
             bookpath.save()
-            print(bookpath)
+            store_steps(bookpath, books_in_bookpath)
+            return HttpResponseRedirect(reverse("bookpath", args=(bookpath.id, )))
     else:
         contribution_form = ContributionForm()
         contribution_step_formset = StepFormSet()
@@ -155,3 +166,18 @@ def contribute(request):
         'contribution_form': contribution_form,
         'contribution_step_formset': contribution_step_formset,
     })
+
+
+def bookpath(request, bookpath_id):
+    bookpath = get_object_or_404(BookPath, id=bookpath_id)
+    bookpath_steps = BookPathStep.objects.filter(bookpath=bookpath)
+    total_pages = sum([step.book.number_of_pages for step in bookpath_steps])
+    return render(request, "bookpaths_app/bookpath.html", {
+        "bookpath": bookpath,
+        "bookpath_steps": bookpath_steps,
+        "total_pages": total_pages,
+    })
+
+
+def book(request, book_isbn):
+    pass

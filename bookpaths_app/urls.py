@@ -9,5 +9,7 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("profile", views.profile, name="profile"),
     path("contribute", views.contribute, name="contribute"),
-    path("categories", views.categories, name="categories")
+    path("categories", views.categories, name="categories"),
+    path("bookpath/<int:bookpath_id>", views.bookpath, name="bookpath"),
+    path("book/<int:book_isbn>", views.book, name="book"),
 ]

@@ -9,7 +9,21 @@ A bookpath is a series of ordered steps through reading material that will guide
 
 **Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other peoples profiles.
 
-**Contribute**: Users will be able to contribute to the platform by proposing the bookpaths that they find relevant for mastering a topic in one of the predefines categories. A bookpath must at least have a step (that is a book). The number of steps of a bookpath is currently limited to 5 due to API limitations.
+**Contribute**: Users will be able to contribute to the platform by proposing the bookpaths that they find relevant for mastering a topic in one of the predefines categories. A bookpath must at least have a step (that is a book). The number of steps of a bookpath is currently limited to 5 due to API limitations. Once a valid bookpath is submitted, the user is redirected to the view of the bookpath.
+
+**Bookpaths**: Each bookpath can be explored individually on its bookpath page. The following information of the bookpath will be displayed:
+
+    * Name of the bookpath.
+    * Category of the bookpath.
+    * Description of the bookpath.
+    * The number of steps that form the bookpath.
+    * The number of pages of all the books that form the bookpath.
+    * The author of the bookpath.
+    * The number of followers of the bookpath.
+    * The percentage of users that have completed the bookpath.
+    * An overview of all the books that compose the bookpath and the possibility to navigate over them.
+
+**Follow Bookpaths**: From the bookpath page a logged in user will have the option to follow a bookpath. Once a user is following the bookpath the bookpath page will reflect it on its numbers and the bookpath will appear in the user's profile.
 
 ---
 ## Demo
