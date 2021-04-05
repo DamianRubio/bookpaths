@@ -142,6 +142,11 @@ def contribute(request):
                         'contribution_form': contribution_form,
                         'contribution_step_formset': contribution_step_formset,
                     })
+            bookpath_cd = contribution_form.cleaned_data
+            category = Category.objects.get(name=bookpath_cd.get('category'))
+            bookpath = BookPath(name=bookpath_cd.get('name'), description=bookpath_cd.get('description'), category=category, author=request.user)
+            bookpath.save()
+            print(bookpath)
     else:
         contribution_form = ContributionForm()
         contribution_step_formset = StepFormSet()

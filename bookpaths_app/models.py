@@ -21,8 +21,10 @@ class Category(models.Model):
 class BookPath(models.Model):
     name = models.CharField(max_length=120, blank=False, null=False)
     description = models.CharField(max_length=240, blank=False, null=False)
-    author = models.ManyToManyField(User, related_name='proposed_paths')
-    category = models.ManyToManyField(Category, related_name='paths')
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='proposed_paths')
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name='paths')
     follow_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
@@ -77,3 +79,21 @@ class Book(models.Model):
 
     def __str__(self):
         return f'{self.title} by {self.author}'
+
+
+class BookPathStep(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    bookpath = models.ForeignKey(BookPath, on_delete=models.CASCADE)
+    step_number = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        current_steps = BookPathStep.objects.filter(
+            bookpath=self.bookpath).count()
+        if current_steps == 0:
+            self.step_number = 0
+        else:
+            self.step_number = current_steps
+        super(BookPathStep, self).save()
+
+    def __str__(self):
+        return f'Step {self.step_number} of BookPath {self.bookpath.name}'
