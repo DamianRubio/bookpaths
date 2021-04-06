@@ -26,11 +26,14 @@ Book Path - {{ bookpath.name }}
     <div class="w-100 justify-content-center h4 mb-3">
         <span>Followers: TODO</span> | <span>Finished %: TODO</span>
     </div>
-    <form method="post" class="text-right">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" name="path_follow" value="Follow BookPath"
-          style="width:200px;" />
-      </form>
+    {% if bookpath.author == user %}
+    {% else %}
+        <form method="post" class="text-right">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" name="path_follow" value="Follow BookPath"
+            style="width:200px;" />
+        </form>
+    {% endif %}
   </div>
   <div class="row justify-content-center w-100 mt-3">
     {% for step in bookpath_steps %}

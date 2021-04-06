@@ -1,6 +1,10 @@
 {% extends "bookpaths_app/layout.html" %}
 {% load static %}
 
+{% block title %}
+Book Path - {{ user.username }}
+{% endblock %}
+
 {% block script %}
 {% endblock %}
 
@@ -27,9 +31,25 @@
             </li>
           </ul>
           <div class="tab-content">
-            <div class="tab-pane fade active show" id="active-content">Lorem Ipsum 1</div>
-            <div class="tab-pane fade" id="finished-content">Lorem Ipsum 2</div>
-            <div class="tab-pane fade" id="contributions-content">Lorem Ipsum 3</div>
+            <div class="tab-pane fade active show mt-3" id="active-content">Lorem Ipsum 1</div>
+            <div class="tab-pane fade mt-3" id="finished-content">Lorem Ipsum 2</div>
+            <div class="tab-pane fade mt-3" id="contributions-content">
+              {% if contributions %}
+                {% for bookpath_contributed in contributions %}
+                  <div class="media container position-relative bg-light shadow p-4 rounded mb-3">
+                    <div class="media-body">
+                        <h3>{{ bookpath_contributed.name }}</h3>
+                        <span class="text-muted d-block">Category: {{ bookpath_contributed.category }}</span>
+                        <span class="text-muted d-block">{{ bookpath_contributed.description }}</span>
+                        <span class="">Followers: {{ bookpath_contributed.follow_count }}</span>
+                        <a href="{% url 'bookpath' bookpath_id=bookpath_contributed.id %}" class="stretched-link"></a>
+                    </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+              You haven't submitted a bookpath yet. Visit the <a href="{% url 'contribute' %}">contribute</a> section to add your first bookpath
+              {% endif %}
+            </div>
           </div>
     </div>
 </div>
