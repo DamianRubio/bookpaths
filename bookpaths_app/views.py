@@ -7,12 +7,11 @@ from django.core.validators import RegexValidator
 from django.db import IntegrityError
 from django.forms.formsets import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .models import Book, BookPath, BookPathStep, Category, User
-
-from django.shortcuts import get_object_or_404
+from .models import (Book, BookPath, BookPathFollow, BookPathStep, Category,
+                     User)
 
 
 class ContributionStepForm(forms.Form):
@@ -95,6 +94,15 @@ def register(request):
 
 @login_required
 def profile(request):
+
+    if request.method == 'POST':
+        if 'path_start' in request.POST:
+            bookpath_follow_id = request.POST.get('bookpath-follow')
+            bookpath_follow = get_object_or_404(BookPathFollow, id=bookpath_follow_id)
+            bookpath_follow.status = 1
+            bookpath_follow.current_step +=1
+            bookpath_follow.save()
+
     active_bookpaths = request.user.follows.filter(
         status=0) | request.user.follows.filter(status=1)
     finished_bookpaths = request.user.follows.filter(status=2)
@@ -169,13 +177,33 @@ def contribute(request):
 
 
 def bookpath(request, bookpath_id):
+
     bookpath = get_object_or_404(BookPath, id=bookpath_id)
+
+    if request.method == 'POST':
+        if 'path_follow' in request.POST:
+            bookpath_follow = BookPathFollow(
+                bookpath=bookpath, follower=request.user)
+            bookpath_follow.save()
+        elif 'path_unfollow' in request.POST:
+            bookpath_follow = BookPathFollow.objects.get(
+                bookpath=bookpath, follower=request.user)
+            bookpath_follow.delete()
+        bookpath.refresh_from_db()
+
     bookpath_steps = BookPathStep.objects.filter(bookpath=bookpath)
     total_pages = sum([step.book.number_of_pages for step in bookpath_steps])
+    is_following = False
+
+    if request.user.is_authenticated:
+        is_following = BookPathFollow.objects.filter(
+            bookpath=bookpath, follower=request.user).exists()
+
     return render(request, "bookpaths_app/bookpath.html", {
         "bookpath": bookpath,
         "bookpath_steps": bookpath_steps,
         "total_pages": total_pages,
+        "is_following": is_following,
     })
 
 

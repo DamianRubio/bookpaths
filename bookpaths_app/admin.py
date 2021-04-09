@@ -3,11 +3,13 @@ from django.contrib.auth.hashers import make_password
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from .models import Book, BookPath, BookPathStep, Category, User
+from .models import (Book, BookPath, BookPathFollow, BookPathStep, Category,
+                     User)
 
 admin.site.register(BookPath)
 admin.site.register(Book)
 admin.site.register(BookPathStep)
+admin.site.register(BookPathFollow)
 
 
 class CategoryResource(resources.ModelResource):

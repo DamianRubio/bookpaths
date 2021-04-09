@@ -51,17 +51,23 @@ class BookPathFollow(models.Model):
     status = models.IntegerField(choices=Status, default=NOT_STARTED)
     current_step = models.PositiveIntegerField(default=0)
 
+    def __str__(self):
+        return f'{self.follower} follows bookpath {self.bookpath} with status {self.status} in step {self.current_step}'
+
+    class Meta:
+        unique_together = (("bookpath", "follower"),)
+
 
 @receiver(post_save, sender=BookPathFollow)
 def increase_bookpath_follows(sender, instance, created, **kwargs):
-    bookpath = BookPath.objects.get(id=sender.bookpath)
+    bookpath = BookPath.objects.get(id=instance.bookpath.id)
     bookpath.follow_count += 1
     bookpath.save()
 
 
 @receiver(pre_delete, sender=BookPathFollow)
-def decrease_bookpath_follows(sender, instance, created, **kwargs):
-    bookpath = BookPath.objects.get(id=sender.bookpath)
+def decrease_bookpath_follows(sender, instance, using, **kwargs):
+    bookpath = BookPath.objects.get(id=instance.bookpath.id)
     bookpath.follow_count -= 1
     bookpath.save()
 
@@ -83,7 +89,7 @@ class Book(models.Model):
 
 class BookPathStep(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    bookpath = models.ForeignKey(BookPath, on_delete=models.CASCADE)
+    bookpath = models.ForeignKey(BookPath, on_delete=models.CASCADE, related_name='bookpath_steps')
     step_number = models.IntegerField()
 
     def save(self, *args, **kwargs):

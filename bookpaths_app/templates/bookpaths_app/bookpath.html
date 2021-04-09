@@ -24,15 +24,22 @@ Book Path - {{ bookpath.name }}
         <span>Steps: {{ bookpath_steps|length }}</span> | <span>Pages: {{ total_pages }} </span> | <span>Author: {{bookpath.author}}</span>
     </div>
     <div class="w-100 justify-content-center h4 mb-3">
-        <span>Followers: TODO</span> | <span>Finished %: TODO</span>
+        <span>Followers: {{ bookpath.follow_count}}</span> | <span>Finished %: TODO</span>
     </div>
-    {% if bookpath.author == user %}
-    {% else %}
-        <form method="post" class="text-right">
-            {% csrf_token %}
-            <input type="submit" class="btn btn-primary" name="path_follow" value="Follow BookPath"
-            style="width:200px;" />
-        </form>
+    {% if bookpath.author != user and user.is_authenticated %}
+        {% if not is_following %}
+            <form method="post" class="text-right">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary" name="path_follow" value="Follow BookPath"
+                style="width:200px;" />
+            </form>
+        {% else %}
+            <form method="post" class="text-right">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" name="path_unfollow" value="Unfollow BookPath"
+                style="width:200px;" />
+            </form>
+        {% endif %}
     {% endif %}
   </div>
   <div class="row justify-content-center w-100 mt-3">

@@ -24,3 +24,9 @@ body>.container {
     width: 10%;
     height: auto;
 }
+
+/* Trick to make a button inside a media card clickable */
+.media-body .btn {
+    z-index: 2;
+    position: relative;
+ }
