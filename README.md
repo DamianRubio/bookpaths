@@ -8,9 +8,11 @@ A bookpath is a series of ordered steps through reading material that will guide
 
 ## Functionalities
 
-**Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other people profiles.
+**Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other people profiles. The profile has the following sections (displayed as tabs):
 
-* **Active Bookpaths**: A user can see the bookpahts that are currently active on his profile. Active bookpaths are those bookpath the user follows that he has not yet started or is in the process of reading. The user will have the ability to start the bookpath, advance through its steps or to mark the bookpath as finished. If a user wants to leave a bookpath he can visit the bookpath page and unfollow it from there.
+* **Active Bookpaths**: An user can see the bookpahts that are currently active on his profile. Active bookpaths are those bookpaths the user follows that he has not yet started or is in the process of reading. The user will have the ability to start the bookpath, advance through its steps or to mark the bookpath as finished. If a user wants to leave a bookpath he can visit the bookpath page and unfollow it from there.
+* **Finished Bookpaths**: An user can see the bookpahts that he has completed on his profile.
+* **Your Contributions**: An user can see the bookpahts that he has submitted on his profile. This view will allow the user to see how his submissions are performing in a fast way.
 
 **Contribute**: Users will be able to contribute to the platform by proposing the bookpaths that they find relevant for mastering a topic in one of the predefines categories. A bookpath must at least have a step (that is a book). The number of steps of a bookpath is currently limited to 5 due to API limitations. Once a valid bookpath is submitted, the user is redirected to the view of the bookpath.
 

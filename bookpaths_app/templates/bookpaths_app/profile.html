@@ -1,5 +1,6 @@
 {% extends "bookpaths_app/layout.html" %}
 {% load static %}
+{% load extra_functions %}
 
 {% block title %}
 Book Path - {{ user.username }}
@@ -45,15 +46,38 @@ Book Path - {{ user.username }}
                         <form method="post">
                           {% csrf_token %}
                           <input type="hidden" name="bookpath-follow" value="{{active.id}}">
-                          <input type="submit" class="btn btn-success" name="path_start" value="Start reading"
+                          <input type="submit" class="btn btn-success mt-1" name="path_start" value="Start reading"
                           style="width:200px;" />
                         </form>
                         {% elif active.current_step < active.bookpath.bookpath_steps.count%}
                         <span class="d-block">You are on step {{ active.current_step }} of {{ active.bookpath.bookpath_steps.count }}</span>
-                        {% else %}
+                        {% with active.current_step|add:-1 as current %}
+                        {% with active.bookpath.bookpath_steps.all|return_item:current as current_step_ %}
+                          <span class="d-block">You are currently reading: <span class="font-weight-bold font-italic">{{ current_step_.book }}</span></span>
+                        {% endwith %}
+                        {% endwith %}
+                        {% with active.current_step as next %}
+                        {% with active.bookpath.bookpath_steps.all|return_item:next as next_step_  %}
+                          <span class="d-block">Your next read will be: <span class="font-weight-bold font-italic">{{ next_step_.book }}</span></span>
+                        {% endwith %}
+                        {% endwith %}
                         <form method="post">
                           {% csrf_token %}
-                          <input type="submit" class="btn btn-success" name="path_finished" value="I'm done"
+                          <input type="hidden" name="bookpath-follow" value="{{active.id}}">
+                          <input type="submit" class="btn btn-primary mt-1" name="path_next" value="Next step"
+                          style="width:200px;" />
+                        </form>
+                        {% else %}
+                        <span class="d-block">You are on step {{ active.current_step }} of {{ active.bookpath.bookpath_steps.count }}</span>
+                        {% with active.current_step|add:-1 as current %}
+                        {% with active.bookpath.bookpath_steps.all|return_item:current as current_step_ %}
+                          <span class="d-block">You are currently reading: <span class="font-weight-bold font-italic">{{ current_step_.book }}</span></span>
+                        {% endwith %}
+                        {% endwith %}
+                        <form method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="bookpath-follow" value="{{active.id}}">
+                          <input type="submit" class="btn btn-success mt-1" name="path_finished" value="I'm done"
                           style="width:200px;" />
                         </form>
                         {% endif %}

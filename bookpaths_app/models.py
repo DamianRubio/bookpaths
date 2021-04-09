@@ -95,10 +95,7 @@ class BookPathStep(models.Model):
     def save(self, *args, **kwargs):
         current_steps = BookPathStep.objects.filter(
             bookpath=self.bookpath).count()
-        if current_steps == 0:
-            self.step_number = 0
-        else:
-            self.step_number = current_steps
+        self.step_number = current_steps+1
         super(BookPathStep, self).save()
 
     def __str__(self):
