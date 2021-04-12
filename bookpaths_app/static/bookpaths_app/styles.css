@@ -25,6 +25,12 @@ body>.container {
     height: auto;
 }
 
+.main_cover_image {
+    width: 100%;
+    max-width: 10rem;
+    height: auto;
+}
+
 /* Trick to make a button inside a media card clickable */
 .media-body .btn {
     z-index: 2;

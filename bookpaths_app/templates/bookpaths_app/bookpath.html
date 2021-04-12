@@ -24,7 +24,11 @@ Book Path - {{ bookpath.name }}
         <span>Steps: {{ bookpath_steps|length }}</span> | <span>Pages: {{ total_pages }} </span> | <span>Author: {{bookpath.author}}</span>
     </div>
     <div class="w-100 justify-content-center h4 mb-3">
-        <span>Followers: {{ bookpath.follow_count}}</span> | <span>Finished %: TODO</span>
+        {% if finished_per_cent %}
+            <span>Followers: {{ bookpath.follow_count}}</span> | <span>Finished: {{ finished_per_cent}}%</span>
+        {% else %}
+        <span>Followers: {{ bookpath.follow_count}}</span>
+        {% endif %}
     </div>
     {% if bookpath.author != user and user.is_authenticated %}
         {% if not is_following %}

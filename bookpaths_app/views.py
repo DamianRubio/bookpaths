@@ -207,6 +207,12 @@ def bookpath(request, bookpath_id):
     bookpath_steps = BookPathStep.objects.filter(bookpath=bookpath)
     total_pages = sum([step.book.number_of_pages for step in bookpath_steps])
     is_following = False
+    n_followers = bookpath.follow_count
+    n_finished_followers = BookPathFollow.objects.filter(bookpath=bookpath, status=2).count()
+    if n_followers != 0:
+        finished_per_cent = round((n_finished_followers * 100)/n_followers, 2)
+    else:
+        finished_per_cent = None
 
     if request.user.is_authenticated:
         is_following = BookPathFollow.objects.filter(
@@ -217,8 +223,15 @@ def bookpath(request, bookpath_id):
         "bookpath_steps": bookpath_steps,
         "total_pages": total_pages,
         "is_following": is_following,
+        "finished_per_cent": finished_per_cent
     })
 
 
 def book(request, book_isbn):
-    pass
+    book = get_object_or_404(Book, isbn_10=book_isbn)
+    bookpaths = [ bookpath_step.bookpath for bookpath_step in book.in_step.all()]
+
+    return render(request, "bookpaths_app/book.html", {
+        "book": book,
+        "bookpaths": bookpaths,
+    })

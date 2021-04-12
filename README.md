@@ -30,6 +30,8 @@ A bookpath is a series of ordered steps through reading material that will guide
 
 **Follow Bookpaths**: From the bookpath page a logged in user will have the option to follow a bookpath. Once a user is following the bookpath, the bookpath page will reflect it on its numbers and the bookpath will appear in the user's profile.
 
+**Book**: Each book stored in the system will have its own page. This page will display basic information about the book and a list of all the bookpaths in which the book has been included.
+
 ---
 
 ## Demo

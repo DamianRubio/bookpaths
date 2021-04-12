@@ -89,7 +89,7 @@ class Book(models.Model):
 
 
 class BookPathStep(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='in_step')
     bookpath = models.ForeignKey(BookPath, on_delete=models.CASCADE, related_name='bookpath_steps')
     step_number = models.IntegerField()
 

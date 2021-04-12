@@ -11,5 +11,5 @@ urlpatterns = [
     path("contribute", views.contribute, name="contribute"),
     path("categories", views.categories, name="categories"),
     path("bookpath/<int:bookpath_id>", views.bookpath, name="bookpath"),
-    path("book/<int:book_isbn>", views.book, name="book"),
+    path("book/<str:book_isbn>", views.book, name="book"),
 ]
