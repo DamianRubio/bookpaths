@@ -98,19 +98,22 @@ def profile(request):
     if request.method == 'POST':
         if 'path_start' in request.POST:
             bookpath_follow_id = request.POST.get('bookpath-follow')
-            bookpath_follow = get_object_or_404(BookPathFollow, id=bookpath_follow_id)
+            bookpath_follow = get_object_or_404(
+                BookPathFollow, id=bookpath_follow_id)
             bookpath_follow.status = 1
-            bookpath_follow.current_step +=1
+            bookpath_follow.current_step += 1
             bookpath_follow.save()
         elif 'path_next' in request.POST:
             bookpath_follow_id = request.POST.get('bookpath-follow')
-            bookpath_follow = get_object_or_404(BookPathFollow, id=bookpath_follow_id)
+            bookpath_follow = get_object_or_404(
+                BookPathFollow, id=bookpath_follow_id)
             bookpath_follow.current_step += 1
             bookpath_follow.save()
         elif 'path_finished' in request.POST:
             bookpath_follow_id = request.POST.get('bookpath-follow')
             print(bookpath_follow_id)
-            bookpath_follow = get_object_or_404(BookPathFollow, id=bookpath_follow_id)
+            bookpath_follow = get_object_or_404(
+                BookPathFollow, id=bookpath_follow_id)
             bookpath_follow.status = 2
             bookpath_follow.save()
 
@@ -188,7 +191,6 @@ def contribute(request):
 
 
 def bookpath(request, bookpath_id):
-
     bookpath = get_object_or_404(BookPath, id=bookpath_id)
 
     if request.method == 'POST':

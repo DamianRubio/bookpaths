@@ -60,9 +60,10 @@ class BookPathFollow(models.Model):
 
 @receiver(post_save, sender=BookPathFollow)
 def increase_bookpath_follows(sender, instance, created, **kwargs):
-    bookpath = BookPath.objects.get(id=instance.bookpath.id)
-    bookpath.follow_count += 1
-    bookpath.save()
+    if created:
+        bookpath = BookPath.objects.get(id=instance.bookpath.id)
+        bookpath.follow_count += 1
+        bookpath.save()
 
 
 @receiver(pre_delete, sender=BookPathFollow)
