@@ -66,4 +66,4 @@ The project makes use of the Python library [Requests](https://requests.readthed
 
 The project makes use of the jQuery plugin [Django Dynamic Formsets](https://github.com/elo80ka/django-dynamic-formset) to deal with the insertion of bookpaths. The source code of the plugin is included in the `static/bookpaths_app` folder of the app.
 
-During the development of the project I have used the [Django import / export](https://django-import-export.readthedocs.io/en/stable/) library to load data from files. It  has been included in the `requirements.txt` file.
+During the development of the project I have used the [Django import / export](https://django-import-export.readthedocs.io/en/stable/) library to bulk load data from files to test the application. It  has been included in the `requirements.txt` file.
