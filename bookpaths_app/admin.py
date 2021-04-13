@@ -6,9 +6,6 @@ from import_export.admin import ImportExportModelAdmin
 from .models import (Book, BookPath, BookPathFollow, BookPathStep, Category,
                      User)
 
-admin.site.register(BookPath)
-admin.site.register(Book)
-admin.site.register(BookPathStep)
 admin.site.register(BookPathFollow)
 
 
@@ -37,3 +34,32 @@ class UserResource(resources.ModelResource):
 @admin.register(User)
 class UserAdmin(ImportExportModelAdmin):
     resource_class = UserResource
+
+class BookResource(resources.ModelResource):
+    class Meta:
+        model = Book
+        exclude = ('id',)
+        import_id_fields = ['isbn_10', ]
+
+
+@admin.register(Book)
+class BookAdmin(ImportExportModelAdmin):
+    resource_class = BookResource
+
+class BookPathResource(resources.ModelResource):
+    class Meta:
+        model = BookPath
+
+
+@admin.register(BookPath)
+class BookPathAdmin(ImportExportModelAdmin):
+    resource_class = BookPathResource
+
+class BookPathStepResource(resources.ModelResource):
+    class Meta:
+        model = BookPathStep
+
+
+@admin.register(BookPathStep)
+class BookPathAdmin(ImportExportModelAdmin):
+    resource_class = BookPathStepResource

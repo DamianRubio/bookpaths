@@ -60,6 +60,20 @@ Lorem ipsum
 
 Lorem ipsum
 
+#### Data Loading
+
+In order to have sample data to work with, the repository includes mock data to bulk load, so that all the functionalities of the system can be tested. **Disclaimer: This is not something expected to be included in a regular repository, but an exception has been made so that the application can be properly evaluated**. In order to use this data the next steps must be followed:
+
+1. Perform the migrations with the command `python manage.py migrate`.
+2. Create a superuser with the command `python manage.py createsuperuser`.
+3. Login to the admin panel and start importing the `.csv` files of the `data` directory in the following order:
+   1. Users
+   2. Categories
+   3. Books
+   4. BookPaths
+   5. BookPaths Steps
+4. Once this is done you can test the application with the mock data.
+
 ### Additional Stuff
 
 The project makes use of the [Open Library API](https://openlibrary.org/developers/api) that has some restrictions on number of requests. Consider that if some action is abused in a short span of time an error can be returned by the API.
