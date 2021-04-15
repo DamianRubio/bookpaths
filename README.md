@@ -1,12 +1,14 @@
-# Book Paths
+# BookPaths
 
-Book Paths is a knowledge platform where users can share what they think might be a bookpath to master some subject. Its usage is recommended for people that has a learning approach based on reading.
+BookPaths is a knowledge platform where users can share what they think might be a bookpath to master some subject. Its usage is recommended for people that has a learning approach based on reading.
 
 A bookpath is a series of ordered steps through reading material that will guide a person to master a subject it is interested in.
 
 ---
 
 ## Functionalities
+
+**Home page**: The homepage of the app will have an infinite scroll that will be filled with the recent bookpath submissions in chronological order.
 
 **Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other people profiles. The profile has the following sections (displayed as tabs):
 

@@ -1,1 +1,36 @@
 {% extends "bookpaths_app/layout.html" %}
+{% load static %}
+
+{% block title %}
+BookPaths - Home
+{% endblock %}
+
+{% block body %}
+<div class="row text-center justify-content-center w-100">
+    {% if message %}
+    <div class="w-75 alert alert-warning">{{ message }}</div>
+    {% endif %}
+    <div class="w-75">
+        <h2>Welcome to BookPaths!</h2>
+        <div class="h3 text-muted">
+            The home of the silk roads to master the topics you find relevant
+        </div>
+        <div class="h5 text-muted">
+            Check out some of the recent submission below ⬇️ or explore them at your will
+        </div>
+        <div class="" id="bookpaths">
+        </div>
+        <div class="h5 text-muted">
+            {% if user.is_authenticated %}
+            You reached the end. Consider contributing so that this list grows longer 📜
+            {% else %}
+            You reached the end but there are much more things to do here if you sign in ✨
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'bookpaths_app/infinite.js' %}"></script>
+{% endblock %}

@@ -3,10 +3,11 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.serializers import serialize
 from django.core.validators import RegexValidator
 from django.db import IntegrityError
 from django.forms.formsets import formset_factory
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
@@ -38,6 +39,18 @@ def categories(request):
 
 def index(request):
     return render(request, "bookpaths_app/index.html")
+
+def bookpaths(request):
+    start = int(request.GET.get("start") or 0)
+    end = int(request.GET.get("end") or (start + 5))
+
+    # Generate list of bookpaths
+    all_bookpaths = BookPath.objects.all().order_by("-id")
+
+    # Return list of bookpaths
+    return JsonResponse({
+        "bookpaths": serialize("json", list(all_bookpaths[start:end+1]), fields=('pk','name','description','author.name', 'category','follow_count'))
+    })
 
 
 def login_view(request):
