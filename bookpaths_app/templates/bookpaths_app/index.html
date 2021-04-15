@@ -20,12 +20,7 @@ BookPaths - Home
         </div>
         <div class="" id="bookpaths">
         </div>
-        <div class="h5 text-muted">
-            {% if user.is_authenticated %}
-            You reached the end. Consider <a href="{% url 'contribute' %}">contributing</a> so that this list grows longer 📜
-            {% else %}
-            You reached the end but there are much more things to do here if you <a href="{% url 'login' %}">sign in</a> ✨
-            {% endif %}
+        <div id="tagline">
         </div>
     </div>
 </div>
@@ -33,4 +28,5 @@ BookPaths - Home
 
 {% block script %}
 <script src="{% static 'bookpaths_app/infinite.js' %}"></script>
+<link href="{% static 'bookpaths_app/animation.css' %}" rel="stylesheet">
 {% endblock %}

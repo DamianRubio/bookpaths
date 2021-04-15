@@ -8,7 +8,7 @@ A bookpath is a series of ordered steps through reading material that will guide
 
 ## Functionalities
 
-**Home page**: The homepage of the app will have an infinite scroll that will be filled with the recent bookpath submissions in chronological order.
+**Home page**: The homepage of the app will have an infinite scroll that will be filled with the recent bookpath submissions in chronological order. This page includes CSS animations so that the scroll seems more natural.
 
 **Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other people profiles. The profile has the following sections (displayed as tabs):
 
@@ -16,7 +16,7 @@ A bookpath is a series of ordered steps through reading material that will guide
 * **Finished Bookpaths**: An user can see the bookpahts that he has completed on his profile.
 * **Your Contributions**: An user can see the bookpahts that he has submitted on his profile. This view will allow the user to see how his submissions are performing in a fast way.
 
-**Contribute**: Users will be able to contribute to the platform by proposing the bookpaths that they find relevant for mastering a topic in one of the predefines categories. A bookpath must at least have a step (that is a book). The number of steps of a bookpath is currently limited to 5 due to API limitations. Once a valid bookpath is submitted, the user is redirected to the view of the bookpath.
+**Contribute**: Users will be able to contribute to the platform by proposing the bookpaths that they find relevant for mastering a topic in one of the predefined categories. A bookpath must at least have a step (that is a book). The number of steps of a bookpath is currently limited to 5 due to API limitations. Once a valid bookpath is submitted, the user is redirected to the view of the bookpath.
 
 **Bookpaths**: Each bookpath can be explored individually on its bookpath page. The following information of the bookpath will be displayed:
 
@@ -52,7 +52,7 @@ Lorem ipsum
 
 **Django**: The application has a Django backend that has more than 5 models as it can be seen in the `models.py` file of the `bookpaths_app` app. It uses most of all the other Django features seen during the course.
 
-**JavaScript**: The application uses JS in different parts of its frontend. One example is the addition of the dynamic forms functions in the contribution part of the application. The JS code can be seen in the `static/bookpaths_app` folder of the `bookpaths_app` app.
+**JavaScript**: The application uses JS in different parts of its frontend. One example is the addition of the dynamic forms functions in the contribution part of the application. The JS code can be seen in the `static/bookpaths_app` folder of the `bookpaths_app` app. Other use of JS in the application is to perform the infinite scroll. The JS is in charge of performing the fetch requests that load the bookpaths and to add them to the homepage HTML.
 
 ### Repository Content
 

@@ -26,13 +26,16 @@ function load() {
                 content.forEach(add_post);
                 stop = false;
             }
+            else {
+                add_tag_line();
+            }
         })
 };
 
 function add_post(contents) {
 
     const media_div = document.createElement('div');
-    media_div.className = "media container position-relative bg-light shadow p-4 rounded mb-3";
+    media_div.className = "media container position-relative bg-light shadow p-4 rounded mb-3 fade-in";
 
     const body_div = document.createElement('div');
     body_div.className = 'media-body';
@@ -65,3 +68,9 @@ function add_post(contents) {
     document.querySelector('#bookpaths').append(media_div);
 };
 
+function add_tag_line() {
+    const tag_line_content = document.createElement('span');
+    tag_line_content.className = 'h6 text-muted';
+    tag_line_content.innerHTML = 'You reached the end. If your are new consider signing up to unlock all features ✨'
+    document.querySelector('#tagline').append(tag_line_content);
+}
