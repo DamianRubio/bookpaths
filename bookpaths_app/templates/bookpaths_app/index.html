@@ -22,9 +22,9 @@ BookPaths - Home
         </div>
         <div class="h5 text-muted">
             {% if user.is_authenticated %}
-            You reached the end. Consider contributing so that this list grows longer 📜
+            You reached the end. Consider <a href="{% url 'contribute' %}">contributing</a> so that this list grows longer 📜
             {% else %}
-            You reached the end but there are much more things to do here if you sign in ✨
+            You reached the end but there are much more things to do here if you <a href="{% url 'login' %}">sign in</a> ✨
             {% endif %}
         </div>
     </div>

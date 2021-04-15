@@ -1,3 +1,5 @@
+import time
+
 import requests
 from django import forms
 from django.contrib import messages
@@ -46,6 +48,8 @@ def bookpaths(request):
 
     # Generate list of bookpaths
     all_bookpaths = BookPath.objects.all().order_by("-id")
+
+    time.sleep(1)
 
     # Return list of bookpaths
     return JsonResponse({

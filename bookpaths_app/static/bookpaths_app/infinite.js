@@ -1,11 +1,14 @@
 let counter = 0;
+var stop = false;
 const quantity = 5;
 
 document.addEventListener('DOMContentLoaded', load);
 
 window.onscroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        load();
+    if (stop == false) {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            load();
+        }
     }
 };
 
@@ -14,12 +17,15 @@ function load() {
     const start = counter;
     const end = start + quantity - 1;
     counter = end + 1;
-
+    stop = true;
     fetch(`/bookpaths?start=${start}&end=${end}`)
         .then(response => response.json())
         .then(data => {
-            var content = JSON.parse(data.bookpaths)
-            content.forEach(add_post);
+            var content = JSON.parse(data.bookpaths);
+            if (content.length != 0) {
+                content.forEach(add_post);
+                stop = false;
+            }
         })
 };
 
