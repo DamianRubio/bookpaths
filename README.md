@@ -82,6 +82,8 @@ The project makes use of the [Open Library API](https://openlibrary.org/develope
 
 The project makes use of the Python library [Requests](https://requests.readthedocs.io/en/master/) in order to consume the above mentioned API. This library has been included in the `requirements.txt` file.
 
+The project makes use of the Django application [django-filter](https://django-filter.readthedocs.io/en/stable/index.html) in order to allow filtering elements from the front of the application. This application has been included in the `requirements.txt` file.
+
 The project makes use of the jQuery plugin [Django Dynamic Formsets](https://github.com/elo80ka/django-dynamic-formset) to deal with the insertion of bookpaths. The source code of the plugin is included in the `static/bookpaths_app` folder of the app.
 
 During the development of the project I have used the [Django import / export](https://django-import-export.readthedocs.io/en/stable/) library to bulk load data from files to test the application. It  has been included in the `requirements.txt` file.

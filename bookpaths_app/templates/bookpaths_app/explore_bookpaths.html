@@ -1,0 +1,32 @@
+{% extends "bookpaths_app/layout.html" %}
+{% load static %}
+
+{% block title %}
+BookPaths - Explore
+{% endblock %}
+
+{% block body %}
+<div class="row text-center justify-content-center w-100">
+    {% if message %}
+    <div class="w-75 alert alert-warning">{{ message }}</div>
+    {% endif %}
+    <div class="w-75">
+        <h2>Explore our collection of BookPaths!</h2>
+        <form method="get">
+            {{ filter.form.as_p }}
+            <button type="submit">Search</button>
+        </form>
+        {% for bookpath in filter.qs %}
+        <div class="media container position-relative bg-light shadow p-4 rounded mb-3">
+            <div class="media-body">
+                <h3>{{ bookpath.name }}</h3>
+                <span class="text-muted d-block">Category: {{ bookpath.category }}</span>
+                <span class="text-muted d-block">{{ bookpath.description }}</span>
+                <span class="">Followers: {{ bookpath.follow_count }}</span>
+                <a href="{% url 'bookpath' bookpath_id=bookpath.id %}" class="stretched-link"></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

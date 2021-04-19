@@ -13,6 +13,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from .filters import BookPathFilter
 from .models import (Book, BookPath, BookPathFollow, BookPathStep, Category,
                      User)
 
@@ -35,12 +36,9 @@ class ContributionForm(forms.Form):
         label="BookPath Category", queryset=Category.objects.all(), initial=Category.objects.all().first)
 
 
-def categories(request):
-    return render(request, "bookpaths_app/index.html")
-
-
 def index(request):
     return render(request, "bookpaths_app/index.html")
+
 
 def bookpaths(request):
     start = int(request.GET.get("start") or 0)
@@ -53,7 +51,7 @@ def bookpaths(request):
 
     # Return list of bookpaths
     return JsonResponse({
-        "bookpaths": serialize("json", list(all_bookpaths[start:end+1]), fields=('pk','name','description','author.name', 'category','follow_count'))
+        "bookpaths": serialize("json", list(all_bookpaths[start:end+1]), fields=('pk', 'name', 'description', 'author.name', 'category', 'follow_count'))
     })
 
 
@@ -109,7 +107,7 @@ def register(request):
         return render(request, "bookpaths_app/register.html")
 
 
-@login_required
+@ login_required
 def profile(request):
 
     if request.method == 'POST':
@@ -225,7 +223,8 @@ def bookpath(request, bookpath_id):
     total_pages = sum([step.book.number_of_pages for step in bookpath_steps])
     is_following = False
     n_followers = bookpath.follow_count
-    n_finished_followers = BookPathFollow.objects.filter(bookpath=bookpath, status=2).count()
+    n_finished_followers = BookPathFollow.objects.filter(
+        bookpath=bookpath, status=2).count()
     if n_followers != 0:
         finished_per_cent = round((n_finished_followers * 100)/n_followers, 2)
     else:
@@ -246,9 +245,17 @@ def bookpath(request, bookpath_id):
 
 def book(request, book_isbn):
     book = get_object_or_404(Book, isbn_10=book_isbn)
-    bookpaths = [ bookpath_step.bookpath for bookpath_step in book.in_step.all()]
+    bookpaths = [
+        bookpath_step.bookpath for bookpath_step in book.in_step.all()]
 
     return render(request, "bookpaths_app/book.html", {
         "book": book,
         "bookpaths": bookpaths,
+    })
+
+
+def explore_bookpaths(request):
+    f = BookPathFilter(request.GET, queryset=BookPath.objects.all())
+    return render(request, 'bookpaths_app/explore_bookpaths.html', {
+        'filter': f,
     })
