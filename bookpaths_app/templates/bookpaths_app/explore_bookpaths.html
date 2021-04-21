@@ -15,24 +15,28 @@ BookPaths - Explore BookPaths
         <h2>Explore our collection of BookPaths!</h2>
         <a class="btn btn-secondary d-block mb-2 mt-2" data-toggle="collapse" href="#collapseExample" role="button"
             aria-expanded="false" aria-controls="collapseExample">
-            Filters
+            Filters & Order
         </a>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
                 <form method="get" class="mb-2">
                     <div class="well">
                         <div class="row">
-                            <div class="form-group col-sm-4 col-md-4">
+                            <div class="form-group col-sm-6 col-md-6">
                                 {{ filter.form.name.label_tag }}
                                 {% render_field filter.form.name class="form-control" %}
                             </div>
-                            <div class="form-group col-sm-4 col-md-4">
+                            <div class="form-group col-sm-6 col-md-6">
                                 {{ filter.form.author.label_tag }}
                                 {% render_field filter.form.author class="form-control" %}
                             </div>
-                            <div class="form-group col-sm-4 col-md-4">
+                            <div class="form-group col-sm-6 col-md-6">
                                 {{ filter.form.followers.label_tag }}
                                 {% render_field filter.form.followers class="form-control" %}
+                            </div>
+                            <div class="form-group col-sm-6 col-md-6">
+                                {{ filter.form.steps.label_tag }}
+                                {% render_field filter.form.steps class="form-control" %}
                             </div>
                             <div class="form-group col-sm-12 col-md-12">
                                 {{ filter.form.description.label_tag }}
@@ -48,6 +52,10 @@ BookPaths - Explore BookPaths
                                     {% endfor %}
                                 </div>
                             </div>
+                            <div class="form-group col-sm-12 col-md-12">
+                                {{ filter.form.o.label_tag }}
+                                {% render_field filter.form.o class="form-control" %}
+                            </div>
                         </div>
                         <button class="btn btn-secondary" type="submit">🔍 Search</button>
                     </div>
@@ -61,7 +69,7 @@ BookPaths - Explore BookPaths
                 <h3>{{ bookpath.name }}</h3>
                 <span class="text-muted d-block">Category: {{ bookpath.category }}</span>
                 <span class="text-muted d-block">{{ bookpath.description }}</span>
-                <span class="">Followers: {{ bookpath.follow_count }}</span>
+                <span class="">Followers: {{ bookpath.follow_count }} | Steps: {{ bookpath.steps }}</span>
                 <a href="{% url 'bookpath' bookpath_id=bookpath.id %}" class="stretched-link"></a>
             </div>
         </div>

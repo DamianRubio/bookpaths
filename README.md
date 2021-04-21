@@ -10,9 +10,9 @@ A bookpath is a series of ordered steps through reading material that will guide
 
 **Home page**: The homepage of the app will have an infinite scroll that will be filled with the recent bookpath submissions in chronological order. This page includes CSS animations so that the scroll seems more natural.
 
-**Explore BookPaths**: The application will have a page where all the bookpaths can be explored. This page allows to filter the bookpaths by their most relevant features like the category to which they belong or the number of followers that the bookpath has.
+**Explore BookPaths**: The application will have a page where all the bookpaths can be explored. This page allows to filter and sort the bookpaths by their most relevant features like the category to which they belong, the number of followers or the number of steps that the bookpath has.
 
-**Explore Books**: The application will have a page where all the books stored in the system can be explored. This page is similar to the one that allows to explore by bookpath. It allows filtering the books by their most relevant features like the title, author or number of pages.
+**Explore Books**: The application will have a page where all the books stored in the system can be explored. This page is similar to the one that allows to explore by bookpath. It allows filtering and sorting the books by their most relevant features like the title, author, number of pages or the number bookpaths in which it appears.
 
 **Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other people profiles. The profile has the following sections (displayed as tabs):
 

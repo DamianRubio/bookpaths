@@ -12,10 +12,10 @@ BookPaths - Explore Books
     <div class="w-75 alert alert-warning">{{ message }}</div>
     {% endif %}
     <div class="w-75">
-        <h2>Explore the books that made BookPaths!</h2>
+        <h2>Explore the books that form BookPaths!</h2>
         <a class="btn btn-secondary d-block mb-2 mt-2" data-toggle="collapse" href="#collapseExample" role="button"
             aria-expanded="false" aria-controls="collapseExample">
-            Filters
+            Filters & Order
         </a>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
@@ -30,13 +30,21 @@ BookPaths - Explore Books
                                 {{ filter.form.author.label_tag }}
                                 {% render_field filter.form.author class="form-control" %}
                             </div>
-                            <div class="form-group col-sm-6 col-md-6">
+                            <div class="form-group col-sm-12 col-md-12">
                                 {{ filter.form.publisher.label_tag }}
                                 {% render_field filter.form.publisher class="form-control" %}
                             </div>
                             <div class="form-group col-sm-6 col-md-6">
                                 {{ filter.form.number_of_pages.label_tag }}
                                 {% render_field filter.form.number_of_pages class="form-control" %}
+                            </div>
+                            <div class="form-group col-sm-6 col-md-6">
+                                {{ filter.form.paths.label_tag }}
+                                {% render_field filter.form.paths class="form-control" %}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12">
+                                {{ filter.form.o.label_tag }}
+                                {% render_field filter.form.o class="form-control" %}
                             </div>
                         </div>
                         <button class="btn btn-secondary" type="submit">🔍 Search</button>
@@ -54,7 +62,8 @@ BookPaths - Explore Books
                 <h3>{{ book.title }}</h3>
                 <p class="h4 text-muted">{{ book.author }}</p>
                 <span class="text-muted d-block">Publisher: {{ book.publishers }}</span>
-                <span class="text-muted">Number of pages: {{ book.number_of_pages }}</span>
+                <span class="text-muted d-block">Number of pages: {{ book.number_of_pages }}</span>
+                <span class="text-muted d-block">Paths: {{ book.paths }}</span>
                 <a href="{% url 'book' book_isbn=book.isbn_10 %}" class="stretched-link"></a>
             </div>
         </div>

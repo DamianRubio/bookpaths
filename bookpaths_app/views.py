@@ -8,12 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
 from django.core.validators import RegexValidator
 from django.db import IntegrityError
+from django.db.models import Count
 from django.forms.formsets import formset_factory
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .filters import BookPathFilter, BookFilter
+from .filters import BookFilter, BookPathFilter
 from .models import (Book, BookPath, BookPathFollow, BookPathStep, Category,
                      User)
 
@@ -255,13 +256,16 @@ def book(request, book_isbn):
 
 
 def explore_bookpaths(request):
-    f = BookPathFilter(request.GET, queryset=BookPath.objects.all())
+    f = BookPathFilter(request.GET, queryset=BookPath.objects.all().annotate(
+        steps=Count('bookpath_steps')))
     return render(request, 'bookpaths_app/explore_bookpaths.html', {
         'filter': f,
     })
 
+
 def explore_books(request):
-    f = BookFilter(request.GET, queryset=Book.objects.all())
+    f = BookFilter(request.GET, queryset=Book.objects.all().annotate(
+        paths=Count('in_step')))
     return render(request, 'bookpaths_app/explore_books.html', {
         'filter': f,
     })
