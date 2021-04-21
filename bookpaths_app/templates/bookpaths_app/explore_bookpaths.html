@@ -67,7 +67,7 @@ BookPaths - Explore BookPaths
         <div class="media container position-relative bg-light shadow p-4 rounded mb-3">
             <div class="media-body">
                 <h3>{{ bookpath.name }}</h3>
-                <span class="text-muted d-block">Category: {{ bookpath.category }}</span>
+                <span class="text-muted d-block">Category: {{ bookpath.category }} | Author: {{ bookpath.author }}</span>
                 <span class="text-muted d-block">{{ bookpath.description }}</span>
                 <span class="">Followers: {{ bookpath.follow_count }} | Steps: {{ bookpath.steps }}</span>
                 <a href="{% url 'bookpath' bookpath_id=bookpath.id %}" class="stretched-link"></a>
