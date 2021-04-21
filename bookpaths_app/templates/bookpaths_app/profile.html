@@ -85,7 +85,7 @@ BookPaths - {{ user.username }}
                   </div>
                 {% endfor %}
               {% else %}
-              You do not have active bookpaths. Explore our collection by <a href="{% url 'explore_bookpaths' %}">bookpath</a> or by <a href="#">book</a> and follow your next bookpath
+              You do not have active bookpaths. Explore our collection by <a href="{% url 'explore_bookpaths' %}">bookpath</a> or by <a href="{% url 'explore_books' %}">book</a> and follow your next bookpath
               {% endif %}
             </div>
             <div class="tab-pane fade mt-3" id="finished-content">
@@ -101,7 +101,7 @@ BookPaths - {{ user.username }}
                   </div>
                 {% endfor %}
               {% else %}
-              You haven't finished a bookpath yet. Advance with your active bookpaths or explore our collection by <a href="{% url 'explore_bookpaths' %}">bookpath</a> or by <a href="#">book</a> and follow your next bookpath.
+              You haven't finished a bookpath yet. Advance with your active bookpaths or explore our collection by <a href="{% url 'explore_bookpaths' %}">bookpath</a> or by <a href="{% url 'explore_books' %}">book</a> and follow your next bookpath.
               {% endif %}
             </div>
             <div class="tab-pane fade mt-3" id="contributions-content">
