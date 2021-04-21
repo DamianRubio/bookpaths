@@ -12,6 +12,8 @@ A bookpath is a series of ordered steps through reading material that will guide
 
 **Explore BookPaths**: The application will have a page where all the bookpaths can be explored. This page allows to filter the bookpaths by their most relevant features like the category to which they belong or the number of followers that the bookpath has.
 
+**Explore Books**: The application will have a page where all the books stored in the system can be explored. This page is similar to the one that allows to explore by bookpath. It allows filtering the books by their most relevant features like the title, author or number of pages.
+
 **Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other people profiles. The profile has the following sections (displayed as tabs):
 
 * **Active Bookpaths**: An user can see the bookpahts that are currently active on his profile. Active bookpaths are those bookpaths the user follows that he has not yet started or is in the process of reading. The user will have the ability to start the bookpath, advance through its steps or to mark the bookpath as finished. If a user wants to leave a bookpath he can visit the bookpath page and unfollow it from there.

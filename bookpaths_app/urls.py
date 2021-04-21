@@ -11,6 +11,7 @@ urlpatterns = [
     path("profile", views.profile, name="profile"),
     path("contribute", views.contribute, name="contribute"),
     path("explore/bookpaths", views.explore_bookpaths, name="explore_bookpaths"),
+    path("explore/books", views.explore_books, name="explore_books"),
     path("bookpath/<int:bookpath_id>", views.bookpath, name="bookpath"),
     path("book/<str:book_isbn>", views.book, name="book"),
 ]

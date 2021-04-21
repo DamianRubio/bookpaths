@@ -13,7 +13,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .filters import BookPathFilter
+from .filters import BookPathFilter, BookFilter
 from .models import (Book, BookPath, BookPathFollow, BookPathStep, Category,
                      User)
 
@@ -257,5 +257,11 @@ def book(request, book_isbn):
 def explore_bookpaths(request):
     f = BookPathFilter(request.GET, queryset=BookPath.objects.all())
     return render(request, 'bookpaths_app/explore_bookpaths.html', {
+        'filter': f,
+    })
+
+def explore_books(request):
+    f = BookFilter(request.GET, queryset=Book.objects.all())
+    return render(request, 'bookpaths_app/explore_books.html', {
         'filter': f,
     })

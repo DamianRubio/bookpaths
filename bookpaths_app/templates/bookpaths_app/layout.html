@@ -32,6 +32,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'explore_bookpaths' %}">Explore BookPaths</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'explore_books' %}">Explore Books</a>
+                        </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'contribute' %}">Contribute</a>
