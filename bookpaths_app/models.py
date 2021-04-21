@@ -32,13 +32,11 @@ class BookPath(models.Model):
 
 
 class BookPathFollow(models.Model):
-    CANCELLED = -1
     NOT_STARTED = 0
     WORK_IN_PROGRESS = 1
     FINISHED = 2
 
     Status = (
-        (CANCELLED, 'Cancelled'),
         (NOT_STARTED, 'Not started'),
         (WORK_IN_PROGRESS, 'Work in progress'),
         (FINISHED, 'Bookpath completed'),
@@ -89,8 +87,10 @@ class Book(models.Model):
 
 
 class BookPathStep(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='in_step')
-    bookpath = models.ForeignKey(BookPath, on_delete=models.CASCADE, related_name='bookpath_steps')
+    book = models.ForeignKey(
+        Book, on_delete=models.CASCADE, related_name='in_step')
+    bookpath = models.ForeignKey(
+        BookPath, on_delete=models.CASCADE, related_name='bookpath_steps')
     step_number = models.IntegerField()
 
     def save(self, *args, **kwargs):
