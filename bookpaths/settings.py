@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'bookpaths_app',
     'import_export',
     'django_filters',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

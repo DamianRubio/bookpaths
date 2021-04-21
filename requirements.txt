@@ -7,6 +7,7 @@ diff-match-patch==20200713
 Django==3.1.7
 django-filter==2.4.0
 django-import-export==2.5.0
+django-widget-tweaks==1.4.8
 et-xmlfile==1.0.1
 idna==2.10
 MarkupPy==1.14

@@ -10,6 +10,8 @@ A bookpath is a series of ordered steps through reading material that will guide
 
 **Home page**: The homepage of the app will have an infinite scroll that will be filled with the recent bookpath submissions in chronological order. This page includes CSS animations so that the scroll seems more natural.
 
+**Explore BookPaths**: The application will have a page where all the bookpaths can be explored. This page allows to filter the bookpaths by their most relevant features like the category to which they belong or the number of followers that the bookpath has.
+
 **Profile**: Registered users have a profile from where they can see the bookpaths that they are following and how the bookpaths that they have added are performing. The profile works as a control panel and not as a social network profile as users are not allowed to see other people profiles. The profile has the following sections (displayed as tabs):
 
 * **Active Bookpaths**: An user can see the bookpahts that are currently active on his profile. Active bookpaths are those bookpaths the user follows that he has not yet started or is in the process of reading. The user will have the ability to start the bookpath, advance through its steps or to mark the bookpath as finished. If a user wants to leave a bookpath he can visit the bookpath page and unfollow it from there.
@@ -83,6 +85,8 @@ The project makes use of the [Open Library API](https://openlibrary.org/develope
 The project makes use of the Python library [Requests](https://requests.readthedocs.io/en/master/) in order to consume the above mentioned API. This library has been included in the `requirements.txt` file.
 
 The project makes use of the Django application [django-filter](https://django-filter.readthedocs.io/en/stable/index.html) in order to allow filtering elements from the front of the application. This application has been included in the `requirements.txt` file.
+
+The projects makes use of the Django application [django-widget-tweaks](https://pypi.org/project/django-widget-tweaks/) in order to be able to have more customizable widgets (used for filters). This library has been included in the `requirements.txt` file.
 
 The project makes use of the jQuery plugin [Django Dynamic Formsets](https://github.com/elo80ka/django-dynamic-formset) to deal with the insertion of bookpaths. The source code of the plugin is included in the `static/bookpaths_app` folder of the app.
 

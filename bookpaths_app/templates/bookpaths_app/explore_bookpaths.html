@@ -1,5 +1,6 @@
 {% extends "bookpaths_app/layout.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}
 BookPaths - Explore
@@ -12,10 +13,48 @@ BookPaths - Explore
     {% endif %}
     <div class="w-75">
         <h2>Explore our collection of BookPaths!</h2>
-        <form method="get">
-            {{ filter.form.as_p }}
-            <button type="submit">Search</button>
-        </form>
+        <a class="btn btn-secondary d-block mb-2 mt-2" data-toggle="collapse" href="#collapseExample" role="button"
+            aria-expanded="false" aria-controls="collapseExample">
+            Filters
+        </a>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <form method="get" class="mb-2">
+                    <div class="well">
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4">
+                                {{ filter.form.name.label_tag }}
+                                {% render_field filter.form.name class="form-control" %}
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4">
+                                {{ filter.form.author.label_tag }}
+                                {% render_field filter.form.author class="form-control" %}
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4">
+                                {{ filter.form.followers.label_tag }}
+                                {% render_field filter.form.followers class="form-control" %}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12">
+                                {{ filter.form.description.label_tag }}
+                                {% render_field filter.form.description class="form-control" %}
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12">
+                                {{ filter.form.category.label_tag }}
+                                <div>
+                                    {% for choice in filter.form.category %}
+                                    <label class="checkbox-inline">
+                                        {{ choice.tag }} {{ choice.choice_label }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" type="submit">🔍 Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <span class="text-muted">Your search has returned {{ filter.qs | length }} results</span>
         {% for bookpath in filter.qs %}
         <div class="media container position-relative bg-light shadow p-4 rounded mb-3">
             <div class="media-body">
